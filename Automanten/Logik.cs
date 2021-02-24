@@ -6,9 +6,8 @@ namespace Automanten
 {
     public class Logik
     {
-        public string AlleProdukter(int index)
+        public string AlleProdukter(Automat automat, int index)
         {
-            Automat automat = new Automat();
             string status;
             if (automat.lager[index].antal <= 0)
             {
@@ -22,20 +21,33 @@ namespace Automanten
             string produkt = $" Produkt: {automat.lager[index].produktNavn}\t\t Pris: {automat.lager[index].pris}\t Produkt nummer: {automat.lager[index].produktNummer}\t Status: {status}";
             return produkt;
         }
-        public int AntalProdukter()
+        public int AntalProdukter(Automat automat)
         {
-            Automat automat = new Automat();
             return automat.lager.Count;
         }
-        public int TotalPrisViaNavn(string produktNavn, int antal)
+        public int NummerViaProduktNavn(Automat automat, string produktNavn)
         {
-            Automat automat = new Automat();
-            return automat.lager.Find(lager => lager.produktNavn == produktNavn).pris * antal;
+            return automat.lager.Find(lager => lager.produktNavn == produktNavn).produktNummer;
         }
-        public int TotalPrisViaNummer(int produktNummer, int antal)
+        public string ProduktNavnViaProduktNummer(Automat automat, int produktNummer)
         {
-            Automat automat = new Automat();
+            return automat.lager.Find(c => c.produktNummer == produktNummer).produktNavn;
+        }
+        public int TotalPrisViaNummer(Automat automat, int produktNummer, int antal)
+        {
             return automat.lager.Find(lager => lager.produktNummer == produktNummer).pris * antal;
         }
+        public bool TjekLager(Automat automat, int produktNummer, int antal)
+        {
+            return true;
+        }
+        public void ÆndreLager(Automat automat, int produktNummer, int antal)
+        {
+            Console.WriteLine(automat.lager.Find(produkt => produkt.produktNummer == produktNummer).antal);
+            automat.lager.Find(produkt => produkt.produktNummer == produktNummer).antal = 1;
+            Console.WriteLine(automat.lager.Find(produkt => produkt.produktNummer == produktNummer).antal);
+
+        }
+        
     }
 }

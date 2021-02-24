@@ -16,6 +16,7 @@ namespace Automanten
         public List<Produkt.Læskedrik> lager
         {
             get { return _lager; }
+            set { _lager = value; }
         }
       
 

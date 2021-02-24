@@ -37,5 +37,13 @@ namespace Automanten
                 this._pris = pris;
             }
         }
+        public class Chips : Produkt
+        {
+            public Chips(int produktTal, int pris)
+            {
+                this._produktNummer = produktTal;
+                this._pris = pris;
+            }
+        }
     }
 }
