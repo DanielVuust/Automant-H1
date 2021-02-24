@@ -41,12 +41,13 @@ namespace Automanten
         {
             return true;
         }
-        public void ÆndreLager(Automat automat, int produktNummer, int antal)
+        public Automat ÆndreLager(Automat automat, int produktNummer, int antal)
         {
+
             Console.WriteLine(automat.lager.Find(produkt => produkt.produktNummer == produktNummer).antal);
             automat.lager.Find(produkt => produkt.produktNummer == produktNummer).antal = 1;
             Console.WriteLine(automat.lager.Find(produkt => produkt.produktNummer == produktNummer).antal);
-
+            return automat;
         }
         
     }

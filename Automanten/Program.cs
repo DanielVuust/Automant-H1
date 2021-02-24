@@ -11,7 +11,7 @@ namespace Automanten
 
         static void Main(string[] args)
         {
-
+            Automat automat = new Automat();
             while (true)
             {
                 Program program = new Program();
@@ -19,7 +19,7 @@ namespace Automanten
                 string valg = Console.ReadLine();
                 if (valg == "1")
                 {
-                    program.KøbProdukt();
+                    program.KøbProdukt(automat);
                 }
                 else if (valg == "2")
                 {
@@ -32,10 +32,9 @@ namespace Automanten
                 }
             }
         }
-        private void KøbProdukt()
+        private void KøbProdukt(Automat automat)
         {
             Logik logik = new Logik();
-            Automat automat = new Automat();
             int pris;
             Console.WriteLine("\nHvad vil du købe?\nSkriv enten produkt navnet eller produkt nummeret\n");
             VisProdukter(automat);
@@ -56,7 +55,7 @@ namespace Automanten
             }
             Betal(pris);
             Console.WriteLine($"Du har nu købt {strAntal} styk {logik.ProduktNavnViaProduktNummer(automat, intValg)}");
-            logik.ÆndreLager(automat, intValg, intAntal);
+            automat = logik.ÆndreLager(automat, intValg, intAntal);
 
         }
         private bool Betal(int pris)
