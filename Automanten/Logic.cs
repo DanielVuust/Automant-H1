@@ -2,53 +2,66 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Automanten
+namespace VendingMachine
 {
-    public class Logic
+    static class Logic
     {
-        public string AllProducts(VendingMachine vendingMachine, int index)
+        public static int NummerViaProduktNavn(string productName)
         {
-            string status;
-            if (vendingMachine.stock[index].quantity <= 0)
-            {
-                status = "UDSOLGT";
-            }
-            else
-            {
-                status = Convert.ToString(vendingMachine.stock[index].quantity);
-            }
-
-            string product = $" Produkt: {vendingMachine.stock[index].productName}\t\t Pris: {vendingMachine.stock[index].price}\t Produkt nummer: {vendingMachine.stock[index].productNumber}\t Status: {status}";
-            return product;
+            //Returns the productNumber using the productName as a search.
+            return VendingMachine.beverageStock.Find(lager => lager.productName == productName).productNumber;
         }
-        public int ProductQuantity(VendingMachine vendingMachine)
+        public static string ProductNameViaProductNumber(int productNumber)
         {
-            return vendingMachine.stock.Count;
+            //Returns the productName using the productNumber as a search.
+            return VendingMachine.beverageStock.Find(c => c.productNumber == productNumber).productName;
         }
-        public int NummerViaProduktNavn(VendingMachine vendingMachine, string productName)
+        public static int TotalPriceViaProductNumber(int productNumber, int quantity)
         {
-            return vendingMachine.stock.Find(lager => lager.productName == productName).productNumber;
+            //Returns the total price for the purchase using the priductNumber as a search.
+            return VendingMachine.beverageStock.Find(lager => lager.productNumber == productNumber).price * quantity;
         }
-        public string ProductNameViaProductNumber(VendingMachine vendingMachine, int productNumber)
+        public static bool CheckStock(int productNumber, int quantity)
         {
-            return vendingMachine.stock.Find(c => c.productNumber == productNumber).productName;
-        }
-        public int TotalPriceViaProductNumber(VendingMachine vendingMachine, int productNumber, int quantity)
-        {
-            return vendingMachine.stock.Find(lager => lager.productNumber == productNumber).price * quantity;
-        }
-        public bool TjekLager(VendingMachine vendingMachine, int productNumber, int quantity)
-        {
+            //This will be able to check if there is enough stock to complete the purchase. 
             return true;
         }
-        public VendingMachine ÆndreLager(VendingMachine vendingMachine, int productNumber, int quantity)
+        public static void ChangeStock(int productNumber, int quantity)
+        {
+            //Changes the stock of a specific product using the productNumber as a search.
+            VendingMachine.beverageStock.Find(produkt => produkt.productNumber == productNumber).quantity -= quantity;
+        }
+        public static StringBuilder ShowAllProducts()
+        {
+            //Returns the StringBuilder in the VendingMachineManager.ShowAllProducts()
+            return VendingMachineManager.ShowAllProducts();
+        }
+        public static StringBuilder CurrentMoney()
+        {
+            StringBuilder currentMoney = new StringBuilder();
+
+            foreach (var money in VendingMachine.money)
+            {
+                currentMoney.Append($"{money.Value} styk af {money.Key}kr \t");
+            }
+            return currentMoney;
+        }
+        public static int CurrentTotalMoneySum()
+        {
+            return VendingMachineManager.CurrentTotalMoneySum();
+        }
+        public static void ChangeProductPriceViaProductNumber(int productNumber, int newProductPrice)
+        {
+            VendingMachine.beverageStock.Find(stock => stock.productNumber == productNumber).price = newProductPrice;
+        }
+        public static bool CheckCoin(int coin)
+        {
+            return VendingMachineManager.CheckCoin(coin);
+        }
+        public static string ChangeMoneyStock(int coin, string coinQuantityToRemove)
         {
 
-            Console.WriteLine(vendingMachine.stock.Find(produkt => produkt.productNumber == productNumber).quantity);
-            vendingMachine.stock.Find(produkt => produkt.productNumber == productNumber).quantity -= quantity;
-            Console.WriteLine(vendingMachine.stock.Find(produkt => produkt.productNumber == productNumber).quantity);
-            return vendingMachine;
+            return VendingMachineManager.GetCoinQuantity(coin);
         }
-        
     }
 }
