@@ -37,13 +37,6 @@ namespace VendingMachine
                 this._price = price;
             }
         }
-        public class Chips : Product
-        {
-            public Chips(int productNumber, int price)
-            {
-                this._productNumber = productNumber;
-                this._price = price;
-            }
-        }
+       
     }
 }

@@ -144,20 +144,20 @@ namespace VendingMachine
             Console.WriteLine($"Maskinen indenholder lige nu {Logic.CurrentTotalMoneySum()},00 kr");
             Console.WriteLine(currentMoney);
 
-            while (true)
-            {
+            
                 Console.WriteLine("Skriv hvilken slags mønt du vil fjerne");
                 int coinChoice = Convert.ToInt32(Console.ReadLine());
-                if (!Logic.CheckCoin(coinChoice))
-                {
-                    Console.WriteLine("Maskinen indholder ikke den slags mønt");
-                    continue;
-                }
+            if (!Logic.CheckCoin(coinChoice))
+            {
+                Console.WriteLine("Maskinen indholder ikke den slags mønt");
+            }
+            else
+            {
                 Console.WriteLine("Hvor mange af den slags vil du fjerne?");
 
-                Console.WriteLine(Logic.ChangeMoneyStock(coinChoice, Console.ReadLine()));
-                
+                Logic.ChangeMoneyStock(coinChoice, Console.ReadLine());
             }
+                
         }
         private void AdjustPrice()
         {

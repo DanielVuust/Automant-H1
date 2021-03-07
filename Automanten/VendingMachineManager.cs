@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace VendingMachine
 {
@@ -49,9 +50,9 @@ namespace VendingMachine
                 return false;
             }
         }
-        public static string GetCoinQuantity(int coin)
+        public static void ChangeMoneyStock(int coin, int coinQuantityToRemove)
         {
-            return VendingMachine.money.Values.ToString();
+            VendingMachine.money[coin] = VendingMachine.money[coin] - coinQuantityToRemove;
         }
     }
 }

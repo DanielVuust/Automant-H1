@@ -58,10 +58,11 @@ namespace VendingMachine
         {
             return VendingMachineManager.CheckCoin(coin);
         }
-        public static string ChangeMoneyStock(int coin, string coinQuantityToRemove)
+        public static void ChangeMoneyStock(int coin, string coinQuantityToRemove)
         {
 
-            return VendingMachineManager.GetCoinQuantity(coin);
+            int intCoinQuantityToRemove = Convert.ToInt32(coinQuantityToRemove);
+            VendingMachineManager.ChangeMoneyStock(coin, intCoinQuantityToRemove);
         }
     }
 }
